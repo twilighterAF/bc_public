@@ -1,0 +1,41 @@
+body
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: content-box;
+    background-color: #000000;
+}
+
+table,
+td
+{
+    border: 1px solid #59544a;
+    color: #ffffff;
+}
+
+thead
+{
+    background-color: #ffe2b7;
+    color: #333;
+}
+
+.maindiv
+{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.update_time
+{
+    display: flex;
+    justify-content: center;
+    color: #6eff4e;
+}
+
+#exchangerBTC24pro, #rateBTC24pro, #reserveBTC24pro
+{
+    color: #6eff4e;
+}
