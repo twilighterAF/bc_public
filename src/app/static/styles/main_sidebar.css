@@ -1,0 +1,304 @@
+@import url('main_tables.css');
+
+.sidebar
+{
+    position: sticky;
+    top: 10%;
+    display: flex;
+    background-color: var(--side-color);
+    flex-direction: column;
+    border: 1px solid var(--contrast-color);
+    border-radius: 5px;
+    min-height: 555px;
+    max-height: 555px;
+}
+
+#sidebar-show
+{
+    transition: all 0.5s ease-in-out;
+    width: 35%;
+    min-width: 35%;
+    visibility: visible;
+}
+
+#sidebar-hide
+{
+    transition: all 0.5s ease-in-out;
+    width: 0%;
+    min-width: 0%;
+    border: 0px solid var(--contrast-color);
+    visibility: hidden;
+}
+
+
+#sidebar-hide .pairs-list span
+{
+    font-size: 0px;
+    width: 0;
+}
+
+#sidebar-hide .input-pairs div, #sidebar-hide .sidebar-header input,
+ #sidebar-hide .sidebar-footer button
+{
+    visibility: hidden;
+}
+
+
+.sidebar-header
+{
+    display: flex;
+    flex: auto;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    height: 7.5%;
+    border-bottom: 1px solid var(--contrast-color);
+}
+
+.input-limit, .input-exchanger
+{
+    font-family: "Trebuchet MS", Verdana, sans-serif;
+    font-size: 12px;
+    width: 30%;
+    border: 1px solid var(--table-body);
+    border-radius: 5px;
+    background-color: var(--extra-add-color);
+}
+
+.sidebar-footer
+{
+    display: flex;
+    flex: auto;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    height: 7.5%;
+    border-top: 1px solid var(--contrast-color);
+}
+
+.sidebar-save, .logout, .update-pairs-list
+{
+    font-family: "Trebuchet MS", Verdana, serif;
+    font-size: 12.5px;
+    height: 55%;
+    width: 30%;
+    border: 2px solid var(--contrast-color);
+    border-radius: 5px;
+    background-color: var(--contrast-color);
+    color: var(--side-color);
+    cursor: pointer;
+}
+
+@media screen and (min-width: 1300px)
+{
+    .pairs-list span
+    {
+        font-size: 12px;
+        width: 25%;
+    }
+}
+
+@media screen and (max-width: 1300px) and (min-width: 900px) 
+{
+    .sidebar-footer button
+    {
+        font-size: 10px;
+    }
+
+    .input-pairs div input
+    {
+        margin-top: 3px;
+        width: 32.5%;
+        height: 40%;
+    }
+
+    .input-pairs div button
+    {
+        padding-left: 1px;
+        font-size: 10px;
+    }
+
+    .pairs-list span
+    {
+        font-size: 12px;
+        width: 20%;
+    }
+}
+
+@media screen and (max-width: 900px) 
+{
+    .sidebar-footer button
+    {
+        font-size: 7.5px;
+    }
+
+    .input-pairs div input
+    {
+        margin-top: 2px;
+        width: 22.5%;
+        height: 35%;
+    }
+
+    .input-pairs div button
+    {
+        font-size: 8px;
+        padding-left: 0;
+    }
+
+    .pairs-list span
+    {
+        font-size: 12px;
+        width: none;
+    }
+}
+
+.update-pairs-list
+{
+    background-color: var(--side-color);
+    color: var(--contrast-color);
+}
+
+.sidebar-main
+{
+    display: flex;
+    height: 85%;
+}
+
+.input-pairs
+{
+    display: flex;
+    flex-direction: column;
+    flex: auto;
+    justify-content: flex-start;
+    align-content: flex-start;
+    width: 50%;
+    overflow: auto;
+    border-right: 1px solid var(--contrast-color);
+}
+
+.input-pairs input
+{
+    font-family: "Trebuchet MS", Verdana, serif;
+    font-size: 10px;
+    margin-top: 5px;
+    width: 37.5%;
+    height: 50%;
+}
+
+.input-pairs button
+{
+    padding: 0;
+    padding-left: 2px;
+    font-size: 12px;
+    margin: 0;
+    background-color: var(--side-color);
+    cursor: pointer;
+    border: none;
+}
+
+.input-pairs div
+{
+    height: 10%;
+}
+
+.add-new-pair
+{
+    color: var(--green-button)
+}
+
+.delete-this-pair
+{
+    color: var(--red-button);
+}
+.pairs-list
+{
+    display: flex;
+    flex: auto;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    align-content: space-between;
+    flex-wrap: wrap;
+    width: 60%;
+    overflow: auto;
+    border-left: 1px solid var(--contrast-color);
+}
+
+.pairs-list span
+{
+    font-family: "Trebuchet MS", Verdana, serif;
+    margin: 2px;
+    word-wrap: break-word;
+    border: 1px solid var(--side-color);
+    border-radius: 2px;
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+.side-button
+{
+    position: sticky;
+    margin-right: 5px;
+    top: 40%;
+    height: 40px;
+    width: 40px;
+    border: 1px solid var(--contrast-color);
+    border-left-width: 0px;
+    border-radius: 2px;
+    background-color: var(--side-color);
+    cursor: pointer;
+}
+
+.side-button i
+{   
+    font-size: 30px;
+    margin-right: 2px;
+    color: var(--contrast-color);
+}
+
+.side-button:hover
+{
+    box-shadow: 1px 0px 5px var(--contrast-color);
+    transform: scale(1.03);
+}
+
+.sidebar-footer button:hover
+{
+    box-shadow: 0px 0px 7.5px var(--contrast-color);
+}
+
+.side-button:active, .sidebar-footer button:active
+{
+    transform: scale(0.97);
+}
+
+.sidebar:hover, .sidebar-header:hover, .sidebar-footer:hover, 
+.sidebar-main .input-pairs:hover, .sidebar-main .pairs-list:hover
+{
+    box-shadow: 0px 0px 7.5px var(--contrast-color);
+}
+
+.sidebar-header input:focus
+{
+    box-shadow: 0px 0px 5px var(--hover-sidebar);
+}
+
+.sidebar-header input::placeholder
+{
+    color: var(--text-color);
+}
+
+.pairs-list span:hover
+{
+    box-shadow: 0px 0px 2.5px var(--add-color);
+}
+
+.input-pairs button:active
+{
+    transform: scale(0.97);
+}
+
+.input-pairs button:hover
+{
+    transform: scale(1.03);
+}
