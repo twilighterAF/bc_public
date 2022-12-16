@@ -1,72 +1,101 @@
-from flask import render_template, request, make_response, redirect, url_for, flash
-from werkzeug.security import check_password_hash, generate_password_hash
-from flask_login import login_user, login_required
+import datetime
 
-from adminConfig import PAIRS, LIMIT, FILEPATH
-from . import app, login_manager
-from .apiGateway import call_api, get_api
-from .dataProcessor import get_json_report, get_json_currencies
-from .models import UserLogin
-from .dataBase import DataBase
+from flask import render_template, request, redirect, flash
+from flask_login import login_required, login_user, logout_user, current_user
+from werkzeug.security import generate_password_hash, check_password_hash
+from loguru import logger
+
+from . import app, login_manager, DATABASE
+from .api_gateway import API_BEST_CHANGE
+from .controller import get_json_report, get_json_currencies, parse_json_response
+from .models import User, USER_FILTER
 
 
-db = DataBase('users.db')
-
+@app.before_first_request
+def init():
+    login_manager.login_view = 'login_page'
+    DATABASE.create_all()
+    # new_user = User(login='', password=generate_password_hash(''))
+    # DATABASE.session.add(new_user)
+    # DATABASE.session.commit()
+    
 
 @app.before_request
-def init():
-    login_manager.login_view = 'login'
-    db.create()
+def open_api_gateway():
+    API_BEST_CHANGE.start_api_loop()
+    if request.endpoint == 'api_get_rates':
+        API_BEST_CHANGE.set_timestamp(datetime.datetime.today())
 
 
-@login_manager.user_loader
-def load_user(user_id):
-    return UserLogin().fromDB(user_id, db)
-
-
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/', methods=['GET'])
 @login_required
 def main_page():
-    result = render_template('main.html')
-    response = app.response_class(result, mimetype='text/html')
+    response = app.response_class(render_template('main.html'), mimetype='text/html')
+    response.set_cookie('user', str(current_user))
     return response
 
 
-@app.route('/api/rates:2000', methods=['GET'])
+@app.route('/api/rates', methods=['GET'])
 @login_required
-def get_rates():
-    call_api()  # temp
-    api = get_api()
-    data = get_json_report(PAIRS, LIMIT, FILEPATH, api)
+def api_get_rates():
+    USER_FILTER.get_json_data()
+    api = API_BEST_CHANGE.get_api()
+    data = get_json_report(api)
     response = app.response_class(data, mimetype='application/json')
     return response
 
 
-@app.route('/api/currencies:2000', methods=['GET'])
+@app.route('/api/currencies', methods=['GET'])
 @login_required
-def get_currencies():
-    api = get_api()
+def api_get_currencies():
+    api = API_BEST_CHANGE.get_api()
     data = get_json_currencies(api)
     response = app.response_class(data, mimetype='application/json')
     return response
 
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
+@logger.catch()
+@app.route('/api/receive/sidebar', methods=['POST'])
+@login_required
+def api_receive_from_sidebar():
+    response = app.response_class(status=405)
+
     if request.method == 'POST':
-        #user = db.get_user_by_login(request.form['login'])
-        user, password = request.form['login'], request.form['password']
-        print(user, password)
-        if user and password:
-            #user_login = UserLogin().create(user)
-            #login_user(user_login)
+        data = request.data
+        parse_json_response(data)
+        response = app.response_class(status=200)
+    return response
+
+
+@app.route('/api/filters', methods=['GET'])
+@login_required
+def get_user_filters():
+    data = USER_FILTER.get_json_data()
+    response = app.response_class(data, mimetype='application/json')
+    return response
+
+
+@logger.catch()
+@app.route('/login', methods=['GET', 'POST'])
+def login_page():
+    if request.method == 'POST':
+        login = request.form.get('login')
+        password = request.form.get('password')
+        auth_user = User.query.filter_by(login=login).first()
+        logger.info(f'LOGIN | trying login - {login}')
+
+        if auth_user and check_password_hash(auth_user.password, password):
+            login_user(auth_user)
+            logger.info(f'LOGGED - {login}')
             return redirect('/')
-        flash('Неверный логин или пароль', 'error')
-    return render_template('login.html', title='Авторизация')
+        else:
+            flash('Требуются логин и пароль')
+    return render_template('login.html')
 
 
 @app.route('/logout', methods=['GET'])
-def logout():
-    response = redirect('/')
-    response.set_cookie('logged', 'no')
-    return response
+@login_required
+def logout_page():
+    logout_user()
+    logger.info('LOGOUT')
+    return redirect('/login')

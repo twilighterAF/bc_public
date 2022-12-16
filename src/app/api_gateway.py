@@ -3,6 +3,7 @@ import datetime
 import threading
 
 from bestchange_api import BestChange
+from loguru import logger
 
 
 class API:
@@ -37,16 +38,16 @@ class API:
     def set_timestamp(self, timestamp: datetime):
         self._timestamp = timestamp
 
+    @logger.catch()
     def _api_loop(self):
         while self.get_call_status():
             timestamp = datetime.datetime.today().minute - self.get_timestamp().minute
             self.call_api()
-            print(self.get_timestamp())
             time.sleep(5)
-
             if timestamp >= self._TIMELIMIT:
                 self.set_call_status(False)
 
+    @logger.catch()
     def start_api_loop(self):
         """Call this method"""
         if not self.get_call_status():

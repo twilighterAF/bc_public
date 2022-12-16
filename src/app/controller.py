@@ -3,8 +3,9 @@ import time
 import json
 
 from bestchange_api import BestChange
+from loguru import logger
 
-from adminConfig import FILEPATH
+from . import FILEPATH
 from .models import USER_FILTER
 
 
@@ -38,15 +39,29 @@ def get_all_currencies(api: BestChange) -> list:
     return result
 
 
+@logger.catch()
+def rate_logger(rates: dict):
+    first_rate = None
+    if len(rates[0]) > 0:
+        first_rate = f'give_name: {rates[0][0]["give_name"]} | receive_name: {rates[0][0]["receive_name"]}' \
+                     f' | exchange_name: {rates[0][0]["exchange_name"]} | city: {rates[0][0]["city"]}'
+    logger.debug(f'rate processor - {[x for x in rates]}')
+    logger.debug(f'first rate - {first_rate}')
+
+
+@logger.catch()
 def rate_processor(pairs: dict, limit: int, filepath: str, api: BestChange) -> dict:
     """
     Iterate through pairs dict and get api call by currencies ids
     Limit sets number for maximum exchangers in tables.
     Get update time from filepath zip archive.
+    Filtered by a city if city exist and pair itself allow change city
     """
     result = {}
     headers = {}
+    cities = {}
     if not api.rates():
+        logger.debug('Dont get api')
         return result
 
     for i, pair in enumerate(list(pairs.values())):
@@ -57,31 +72,47 @@ def rate_processor(pairs: dict, limit: int, filepath: str, api: BestChange) -> d
         give_id, _, give_name = give.popitem()[1].values()
         receive_id, _, receive_name = receive.popitem()[1].values()
 
+        city = api.cities().search_by_name(pair[2])
+        city_id = list(city.keys())[0] if len(city) == 1 else None
+        city_name = list(city.values())[0]['name'] if len(city) == 1 else None
         rates_filter = api.rates().filter(give_id, receive_id)
+        count = 0
 
-        for count, rates in enumerate(rates_filter):
+        if not rates_filter:
+            logger.debug('None rates filter')
+            result[i] = {}
+
+        for rates in rates_filter:
+            iter_conditions = rates['city_id'] == 0, rates['city_id'] == city_id
+
             if count >= limit:
                 break
             else:
-                exchange_name = get_exchangers_name(rates, api)
-                rates_dict[count] = {
-                        'give_name': give_name,
-                        'receive_name': receive_name,
-                        'exchange_name': exchange_name,
-                        'give_amount': round(rates['give'], 4),
-                        'receive_amount': round(rates['get'], 4),
-                        'reserve': round(rates['reserve']),
-                        'min_sum': rates['min_sum'],
-                        'max_sum': rates['max_sum'],
-                        }
-        result[i] = rates_dict
+                if not city_id or any(iter_conditions):
+                    exchange_name = get_exchangers_name(rates, api)
+                    rates_dict[count] = {
+                            'give_name': give_name,
+                            'receive_name': receive_name,
+                            'exchange_name': exchange_name,
+                            'give_amount': round(rates['give'], 4),
+                            'receive_amount': round(rates['get'], 4),
+                            'reserve': round(rates['reserve']),
+                            'city': city_name,
+                            }
+                    count += 1
+                else:
+                    continue
+            result[i] = rates_dict
         headers[i] = (give_name, receive_name)
+        cities[i] = city_name
 
+    result['city'] = cities
     result['headers'] = headers
     update_time = get_update_time(filepath)
     result['update_time'] = {'update_time': update_time}
     marked_exchanger = get_marked_exchanger()
-    result['marked_exchanger'] = {'marked_exchanger' : marked_exchanger}
+    result['marked_exchanger'] = {'marked_exchanger': marked_exchanger}
+    rate_logger(result)
     return result
 
 
@@ -103,7 +134,7 @@ def validate_user_limit(limit: str) -> int:
     if limit.strip().isdigit():
         integer = int(limit)
 
-        if 0 < integer < 50:
+        if 0 < integer <= 50:
             result = integer
     return result
 
@@ -115,7 +146,9 @@ def validate_exchanger_name(name: str) -> str:
     return result
 
 
+@logger.catch()
 def parse_json_response(response: bytes):
+    """Response from sidebar"""
     data = json.loads(response)
     user_pairs = {}
     USER_FILTER.limit = validate_user_limit(data['limit'])
@@ -124,9 +157,13 @@ def parse_json_response(response: bytes):
 
     if len(pairs) > 0:
         for count, pair in enumerate(pairs):
-            user_pairs[count] = (pair[0], pair[1])
+            if len(pair) == 2:
+                pair.append('')
+            user_pairs[count] = (pair[0], pair[1], pair[2])
     else:
-        user_pairs[1] = ('Bitcoin (BTC)', 'Альфа cash-in RUB')
+        user_pairs[1] = ('Bitcoin (BTC)', 'Альфа cash-in RUB', '')
 
+    logger.debug(f'USER INPUT | USER_FILTER.limit = {USER_FILTER.limit} | USER_FILTER.exchanger = {USER_FILTER.exchanger} |'
+                 f'USER_FILTER.pairs = {user_pairs}')
     USER_FILTER.pairs = user_pairs
     USER_FILTER.json_dump_file()
