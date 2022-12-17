@@ -1,0 +1,73 @@
+{
+  "<User 1>": {
+    "limit": 10,
+    "exchanger": "CoinJoin",
+    "pairs": {
+      "0": [
+        "Bitcoin (BTC)",
+        "BAT (BAT)",
+        ""
+      ],
+      "1": [
+        "BAT (BAT)",
+        "Bitcoin (BTC)",
+        ""
+      ]
+    }
+  },
+  "<User 2>": {
+    "limit": 5,
+    "exchanger": "no_exchanger",
+    "pairs": {
+      "0": [
+        "0x (ZRX)",
+        "Bitcoin (BTC)",
+        ""
+      ]
+    }
+  },
+  "<User 3>": {
+    "limit": 25,
+    "exchanger": "CryptoMax",
+    "pairs": {
+      "0": [
+        "Bitcoin (BTC)",
+        "Тинькофф cash-in RUB",
+        ""
+      ]
+    }
+  },
+  "<User 4>": {
+    "limit": 15,
+    "exchanger": "RamonCash",
+    "pairs": {
+      "0": [
+        "0x (ZRX)",
+        "Bitcoin (BTC)",
+        ""
+      ]
+    }
+  },
+  "<User 5>": {
+    "limit": 5,
+    "exchanger": "no_exchanger",
+    "pairs": {
+      "0": [
+        "0x (ZRX)",
+        "Bitcoin (BTC)",
+        ""
+      ]
+    }
+  },
+  "<User 6>": {
+    "limit": 5,
+    "exchanger": "no_exchanger",
+    "pairs": {
+      "0": [
+        "0x (ZRX)",
+        "Bitcoin (BTC)",
+        ""
+      ]
+    }
+  }
+}

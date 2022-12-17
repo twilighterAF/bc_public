@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="login_page" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/styles/login.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="static/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="static/favicon/favicon-16x16.png">
+    <script defer type="module" src="static/scripts/login.js"></script>
+    <title>BestChange na minimalkax</title>
+</head>
+
+<body>
+    <div class="main-div">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class=flashes>
+                    {% for message in messages %}
+                        {{ message }}
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+        <form method="POST">
+        <table>
+            <tr>
+                <td>
+                    <input class="login" type="text" placeholder="Login" name="login" required>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input class="password" type="password" placeholder="Password" name="password" required>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input class="submit" type="submit" value="Submit">
+                </td>
+            </tr>
+        </table>
+        </form>
+    </div>
+</body>
+</html>
