@@ -1,17 +1,97 @@
 {
   "<User 1>": {
-    "limit": 10,
-    "exchanger": "CoinJoin",
+    "limit": 7,
+    "exchanger": "BitBong",
     "pairs": {
       "0": [
-        "Bitcoin (BTC)",
-        "BAT (BAT)",
+        "Tether TRC20 (USDT)",
+        "Альфа cash-in RUB",
         ""
       ],
       "1": [
-        "BAT (BAT)",
-        "Bitcoin (BTC)",
+        "USDCoin ERC20 (USDC)",
+        "Альфа cash-in RUB",
         ""
+      ],
+      "2": [
+        "Bitcoin (BTC)",
+        "Альфа cash-in RUB",
+        ""
+      ],
+      "3": [
+        "Ethereum (ETH)",
+        "Альфа cash-in RUB",
+        ""
+      ],
+      "4": [
+        "Litecoin (LTC)",
+        "Альфа cash-in RUB",
+        ""
+      ],
+      "5": [
+        "Tether TRC20 (USDT)",
+        "Наличные RUB",
+        "Москва"
+      ],
+      "6": [
+        "Tether TRC20 (USDT)",
+        "Наличные AED",
+        "Дубай"
+      ],
+      "7": [
+        "Tether TRC20 (USDT)",
+        "Наличные USD",
+        "Дубай"
+      ],
+      "8": [
+        "Наличные AED",
+        "Tether TRC20 (USDT)",
+        "Дубай"
+      ],
+      "9": [
+        "Наличные USD",
+        "Tether TRC20 (USDT)",
+        "Дубай"
+      ],
+      "10": [
+        "Tether TRC20 (USDT)",
+        "QIWI RUB",
+        ""
+      ],
+      "11": [
+        "Bitcoin (BTC)",
+        "QIWI RUB",
+        ""
+      ],
+      "12": [
+        "Ethereum (ETH)",
+        "QIWI RUB",
+        ""
+      ],
+      "13": [
+        "Litecoin (LTC)",
+        "QIWI RUB",
+        ""
+      ],
+      "14": [
+        "USDCoin ERC20 (USDC)",
+        "Наличные RUB",
+        "Москва"
+      ],
+      "15": [
+        "Bitcoin (BTC)",
+        "Наличные RUB",
+        "Москва"
+      ],
+      "16": [
+        "Ethereum (ETH)",
+        "Наличные RUB",
+        "Москва"
+      ],
+      "17": [
+        "Litecoin (LTC)",
+        "Наличные RUB",
+        "Москва"
       ]
     }
   },
