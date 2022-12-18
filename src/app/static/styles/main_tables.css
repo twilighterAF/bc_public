@@ -7,7 +7,7 @@
     --mixin-color: #7cff72;
     --side-color: #000000;
     --text-color: #ffffff;
-    --extra-add-color: #ffffff;
+    --extra-add-color: #f2f2f2;
     --red-button: #ff0000;
     --green-button: #7cff72;
     --table-body: #000000;
@@ -16,16 +16,16 @@
 
     :root.light-mode
     {
-    --back-color: #ffffff;
+    --back-color: #fffaee;
     --add-color: #ff7700;
-    --contrast-color: #ff7bb0;
-    --mixin-color: #0b00d5;
-    --side-color: #ffffff;
+    --contrast-color: #ff71a3;
+    --mixin-color: #0037ff;
+    --side-color: #fffaee;
     --text-color: #000000;
-    --extra-add-color: #ffffff;
+    --extra-add-color: #f2f2f2;
     --red-button: #ff0000;
     --green-button: #7cff72;
-    --table-body: #d3e0ff;
+    --table-body: #c9e1ff;
     --hover-sidebar: #ffffff;
     }
 
@@ -58,7 +58,7 @@ body
     padding: 0;
     box-sizing: content-box;
     background-color: var(--back-color);
-    filter: saturate(133%);
+    filter: saturate(105%);
 }
 
 .main-content

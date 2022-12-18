@@ -1,5 +1,6 @@
 const host = {
 	base:'http://91.240.86.166',
+    local: 'http://127.0.0.1:5000'
 }
 export const URL = {
     logout: host.base + '/logout',
