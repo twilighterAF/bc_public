@@ -34,64 +34,74 @@
         "Москва"
       ],
       "6": [
-        "Tether TRC20 (USDT)",
-        "Наличные AED",
-        "Дубай"
+        "Bitcoin (BTC)",
+        "Наличные RUB",
+        "Москва"
       ],
       "7": [
-        "Tether TRC20 (USDT)",
-        "Наличные USD",
-        "Дубай"
+        "Ethereum (ETH)",
+        "Наличные RUB",
+        "Москва"
       ],
       "8": [
-        "Наличные AED",
-        "Tether TRC20 (USDT)",
-        "Дубай"
+        "Litecoin (LTC)",
+        "Наличные RUB",
+        "Москва"
       ],
       "9": [
-        "Наличные USD",
         "Tether TRC20 (USDT)",
-        "Дубай"
+        "QIWI RUB",
+        ""
       ],
       "10": [
-        "Tether TRC20 (USDT)",
+        "Bitcoin (BTC)",
         "QIWI RUB",
         ""
       ],
       "11": [
-        "Bitcoin (BTC)",
+        "Ethereum (ETH)",
         "QIWI RUB",
         ""
       ],
       "12": [
-        "Ethereum (ETH)",
+        "Litecoin (LTC)",
         "QIWI RUB",
         ""
       ],
       "13": [
-        "Litecoin (LTC)",
-        "QIWI RUB",
-        ""
+        "Tether TRC20 (USDT)",
+        "Наличные USD",
+        "Дубай"
       ],
       "14": [
-        "USDCoin ERC20 (USDC)",
-        "Наличные RUB",
-        "Москва"
+        "Наличные USD",
+        "Tether TRC20 (USDT)",
+        "Дубай"
       ],
       "15": [
-        "Bitcoin (BTC)",
-        "Наличные RUB",
-        "Москва"
+        "Tether TRC20 (USDT)",
+        "Наличные AED",
+        "Дубай"
       ],
       "16": [
-        "Ethereum (ETH)",
-        "Наличные RUB",
-        "Москва"
+        "Наличные AED",
+        "Tether TRC20 (USDT)",
+        "Дубай"
       ],
       "17": [
-        "Litecoin (LTC)",
-        "Наличные RUB",
-        "Москва"
+        "Tether TRC20 (USDT)",
+        "Сбербанк RUB",
+        ""
+      ],
+      "18": [
+        "Tether TRC20 (USDT)",
+        "Тинькофф RUB",
+        ""
+      ],
+      "19": [
+        "Tether TRC20 (USDT)",
+        "Visa/MasterCard RUB",
+        ""
       ]
     }
   },
