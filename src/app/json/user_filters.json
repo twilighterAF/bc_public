@@ -1,7 +1,7 @@
 {
   "<User 1>": {
     "limit": 7,
-    "exchanger": "BitBong",
+    "exchanger": "BTC24pro",
     "pairs": {
       "0": [
         "Tether TRC20 (USDT)",

@@ -11,22 +11,22 @@
     --red-button: #ff0000;
     --green-button: #7cff72;
     --table-body: #000000;
-    --hover-sidebar: #ffffff;
+    --table-header-text: #000000;
     }
 
     :root.light-mode
     {
-    --back-color: #fffaee;
-    --add-color: #ff7700;
-    --contrast-color: #ff71a3;
-    --mixin-color: #0037ff;
-    --side-color: #fffaee;
+    --back-color: #ecf1fa;
+    --add-color: #ff9940;
+    --contrast-color: #ff80ac;
+    --mixin-color: #e600ff;
+    --side-color: #f7faff;
     --text-color: #000000;
-    --extra-add-color: #f2f2f2;
+    --extra-add-color: #ffffff;
     --red-button: #ff0000;
-    --green-button: #7cff72;
-    --table-body: #c9e1ff;
-    --hover-sidebar: #ffffff;
+    --green-button: #0cb500;
+    --table-body: #adc7d386;
+    --table-header-text: #000000;
     }
 
 * 
@@ -124,7 +124,7 @@ thead tr th
     font-size: 14px;
     font-weight: 900;
     border-radius: 5px;
-    color: var(--side-color);
+    color: var(--table-header-text);
 }
 
 thead button
@@ -137,7 +137,7 @@ thead button
 
 thead i
 {
-    color: var(--side-color);
+    color: var(--table-header-text);
 }
 
 #city-hided
