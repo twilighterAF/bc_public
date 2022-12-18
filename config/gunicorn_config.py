@@ -1,4 +1,5 @@
-import multiprocessing
 
-bind = '0.0.0.0:5000'
-workers = multiprocessing.cpu_count() * 2 + 1
+command = '/home/casual/projects/web_app/best_change/venv/bin/gunicorn'
+pythonpath = '/home/casual/projects/web_app/best_change'
+bind = '91.240.86.166:5000'
+workers = 3
