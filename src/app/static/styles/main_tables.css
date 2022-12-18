@@ -12,6 +12,7 @@
     --green-button: #7cff72;
     --table-body: #000000;
     --table-header-text: #000000;
+    --text-background: #000000;
     }
 
     :root.light-mode
@@ -27,6 +28,7 @@
     --green-button: #0cb500;
     --table-body: #adc7d386;
     --table-header-text: #000000;
+    --text-background: #000000;
     }
 
 * 
@@ -87,6 +89,7 @@ body
 {
     font-family: "Arial Black", Verdana, sans-serif;
     color: var(--contrast-color);
+    text-shadow: 1px 1px 1px var(--text-background);
 }
 
 .theme-button
@@ -105,6 +108,7 @@ body
 {
     font-size: 20px;
     color: var(--contrast-color);
+    text-shadow: 1px 1px 1px var(--text-background);
 }
 
 table,

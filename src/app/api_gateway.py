@@ -43,7 +43,8 @@ class API:
         while self.get_call_status():
             timestamp = datetime.datetime.today().minute - self.get_timestamp().minute
             self.call_api()
-            time.sleep(5)
+            logger.debug(f'Api call {self.get_api()}')
+            time.sleep(1)
             if timestamp >= self._TIMELIMIT:
                 self.set_call_status(False)
 
