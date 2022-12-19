@@ -44,7 +44,7 @@ class API:
             timestamp = datetime.datetime.today().minute - self.get_timestamp().minute
             self.call_api()
             logger.debug(f'Api call {self.get_api()}')
-            time.sleep(1)
+            time.sleep(16)
             if timestamp >= self._TIMELIMIT:
                 self.set_call_status(False)
 
@@ -61,4 +61,4 @@ class API:
                 raise InterruptedError
 
 
-API_BEST_CHANGE = API(BestChange(load=False, cache_seconds=35))
+API_BEST_CHANGE = API(BestChange(load=False, cache_seconds=31))
