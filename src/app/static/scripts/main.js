@@ -1,13 +1,13 @@
 const host = {
-	base:'http://91.240.86.166',
+	url:'http://91.240.86.166',
     local: 'http://127.0.0.1:5000'
 }
 export const URL = {
-    logout: host.base + '/logout',
-    currencies: host.base + '/api/currencies',
-    sendToServer: host.base + '/api/receive/sidebar',
-    getSettings: host.base + '/api/filters',
-    rates: host.base + '/api/rates',
+    logout: host.url + '/logout',
+    currencies: host.url + '/api/currencies',
+    sendToServer: host.url + '/api/receive/sidebar',
+    getSettings: host.url + '/api/filters',
+    rates: host.url + '/api/rates',
 }
 
 
